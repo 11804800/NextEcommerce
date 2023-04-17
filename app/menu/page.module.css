@@ -1,0 +1,96 @@
+.btn{
+    padding: 5px 20px 5px 20px;
+    font-size: x-large;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 3px 2px 2px rgba(194, 5, 5, 0.1);
+    color: beige;
+    background-color: rgb(177, 5, 5);
+    text-decoration: none;
+}
+
+.btn:hover{
+    transform: translateY(-6px);
+    color: beige;
+}
+.btn:active
+{
+    font-size:larger;
+}
+
+.h3{
+    text-shadow: 1px 0px #411515, 0px 1px #70125c;
+}
+
+.image
+{
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    aspect-ratio: 3/2;
+    z-index: 99;
+}
+
+.div::after
+{
+    content: "image";
+    position:relative;
+    background-color: rgba(177, 189, 201,0.3);
+    z-index: 999;
+    color: white;
+    padding: 100px 100px 100px 100px;
+    
+}
+
+.cbtn
+{
+    padding: 7px 10px 7px 0px;
+    border:none;
+    font-weight:600;
+    background-color: white;
+    color: rgb(14,50,104);
+}
+.cbtn:hover{
+    
+    color: rgb(3, 47, 87);
+    border-bottom: 2px solid black;
+}
+
+.cbtn:focus
+{
+    color: rgb(3, 47, 87);
+    border-bottom: 2px solid black;
+}
+
+
+.link
+{
+    text-decoration: none;
+    color:#000;
+}
+.link:hover
+{
+    text-decoration: none;
+    color:#000;   
+}
+
+
+.filter
+{
+    padding: 1px 10px 1px 10px;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    justify-content: center;
+}
+.filter::-webkit-scrollbar
+{
+    display: none;
+}
+
+
+.reveiwimg
+{
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+}

@@ -1,0 +1,82 @@
+.quantity {
+    padding: 1px 5px 1px 5px;
+    border: none;
+    border-radius: 2px;
+    box-shadow: -2px 2px 2px 2px rgba(0, 0, 0, 0.1),
+        2px -2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+    border: none;
+    background: white;
+    font-weight: 500;
+    color: rgb(38, 85, 69);
+}
+
+.btn:hover {
+    border-bottom: 2px solid rgb(38, 85, 69);
+}
+
+.btn:focus {
+    border-bottom: 2px solid rgb(38, 85, 69);
+}
+
+.btn1
+{
+    border-radius: 4px;
+    box-shadow: -2px 2px 2px 2px rgba(0, 0, 0, 0.1),
+    2px -2px 2px 2px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border: none;
+    padding: 2px;
+    font-size: small;
+    font-weight: 500;
+}
+
+.heading{
+    font-weight: 500;
+}
+
+.paragraph{
+    font-weight: 500;
+    border: 2px solid black;
+    border-radius: 4px;
+    width: fit-content;
+    padding: 2px;
+}
+
+.text1
+{
+    font-weight: 500;
+    color: rgb(56, 119, 98);
+}
+.text2
+{
+    font-weight: 500;
+    color: brown;
+}
+.text3
+{
+    font-weight: 500;
+}
+
+.box
+{
+    box-shadow: -2px 2px 2px 2px rgba(0, 0, 0, 0.1),
+    2px -2px 2px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    width: fit-content;
+    height:fit-content;
+}
+.align
+{
+    display: grid;
+    place-items: end;
+}
+
+.cartImg
+{
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+}

@@ -1,0 +1,15 @@
+.tabbtn
+{
+    
+    color: black;
+    font-weight: 500;
+    padding: 2px;
+    border: none;
+    background-color: white;
+}
+.tabbtn:focus
+{
+    border-bottom: 2px solid brown;
+    font-weight: 700;
+}
+

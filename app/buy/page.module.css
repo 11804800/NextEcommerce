@@ -1,0 +1,51 @@
+.poster
+{
+    display: flex;
+}
+
+.payHead
+{
+    font-weight: 500;
+}
+
+.card
+{
+    width: 50%;
+    box-shadow: 2px -2px 2px 2px rgba(0,0,0,0.1),
+    -2px 2px 2px 2px rgba(0,0,0,0.1);
+    border: 2px solid rgba(180, 67, 67, 0);
+    border-radius: 4px;
+}
+.quantity
+{
+    box-shadow: 2px -2px 2px 2px rgba(0,0,0,0.1),
+    -2px 2px 2px 2px rgba(0,0,0,0.1);
+    border-radius: 4px;  
+}
+.cancelled
+{
+    text-decoration:line-through;
+    padding: 10px;
+    font-weight: 500;
+}
+.price
+{
+    padding: 10px;
+    font-weight: 700;
+    color: brown;
+}
+
+
+.text
+{
+    font-weight: 500;
+}
+
+.btntxt
+{
+    font-weight: 500;
+    font-size: small;
+}
+
+
+/* {classnames(active:this active===1)}*/

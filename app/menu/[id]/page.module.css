@@ -1,0 +1,150 @@
+.p {
+    font-size: large;
+    font-family: serif;
+    font-weight: 400;
+    width: 100%;
+}
+
+.submit {
+    padding: 2px 20px 2px 20px;
+    border: none;
+    font-size: large;
+    font-weight: 600;
+}
+
+.submit:hover {
+    background-color: rgb(231, 234, 238);
+}
+
+.inline {
+    display: flex;
+}
+
+.cartbtn {
+    border: none;
+    padding: 4px 0px 4px 0px;
+    width: 90%;
+    border-radius: 30px;
+    text-shadow: 2px #000;
+    background-color: rgb(247, 202, 0);
+    font-weight: 500;
+    font-size: small;
+}
+
+.cartbtn:hover {
+    background-color: rgb(219, 185, 14);
+}
+
+.mapbtn {
+    border: none;
+    background-color: rgb(255, 255, 255);
+    font-weight: 500;
+}
+
+
+.buybtn {
+    border: none;
+    width: 90%;
+    text-decoration: none;
+    color: black;
+    padding: 4px 0px 4px 0px;
+    border-radius: 30px;
+    text-shadow: 2px #000;
+    background-color: rgb(250, 137, 0);
+    font-weight: 500;
+    font-size: small;
+}
+
+.buybtn:hover {
+    color: #000;
+    background-color: rgb(221, 132, 24);
+}
+
+.wishbtn {
+    border: 1px solid #000;
+    background-color: rgb(255, 255, 255);
+    padding: 3px 0px 2px 0px;
+    width: 100%;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/*rgb(240, 240, 240) lightestgray*/
+
+
+.lightbold {
+    font-weight: 500;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.width {
+    width: 90%;
+    font-weight: 500;
+}
+
+
+
+.light {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.image {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    aspect-ratio: 3/2;
+}
+
+
+.description {
+    letter-spacing: 1px;
+    width: 68%;
+    line-height: 30px;
+}
+
+@media (max-width:760px) {
+    .description {
+        line-height: normal;
+        letter-spacing: normal;
+        width: 100%;
+        font-size: small;
+    }
+    .image {
+        width: 150%;
+        height: 110%;
+        object-fit: contain;
+        
+    }
+    .width
+    {
+        width: 100%;
+        font-size: small;
+    }
+}
+
+
+.text
+{
+    font-weight: 500;
+}
+
+
+.box
+{
+    width: fit-content;
+}
+
+
+.quantity
+{
+    padding: 0px 6px 0px 6px ;
+    border-radius: 4px;
+    box-shadow: -2px 2px 2px 2px rgba(0,0,0,0.1),
+    2px -2px 2px 2px rgba(0,0,0,0.1);
+    font-weight: 500;
+    border: none;
+}
