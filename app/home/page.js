@@ -47,20 +47,22 @@ function RenderFeatured() {
   return (
     <Carousel responsive={responsive} infinite={true} showDots={true} arrows={false} swipeable={true}>
       {
-        product.filter((item) => item.featured===true).map((item) => {
+        product.filter((item) => item.featured === true).map((item) => {
           return (
             <div className="p-4">
-              <Card className={styles.featuredcard}>
-                <CardImg src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`} alt={item.name} className={styles.featuredimg}>
-                </CardImg>
-                <CardBody>
-                  <CardText className={styles.para} style={{ color: "brown" }}>{item.Brand}</CardText>
-                  <CardText className={styles.name}>{item.name}</CardText>
-                  <CardText className={styles.price}>
-                    &#8377;{item.price}
-                  </CardText>
-                </CardBody>
-              </Card>
+              <Link href={`/menu/${item._id}`} className={styles.link}>
+                <Card className={styles.featuredcard}>
+                  <CardImg src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`} alt={item.name} className={styles.featuredimg}>
+                  </CardImg>
+                  <CardBody>
+                    <CardText className={styles.para} style={{ color: "brown" }}>{item.Brand}</CardText>
+                    <CardText className={styles.name}>{item.name}</CardText>
+                    <CardText className={styles.price}>
+                      &#8377;{item.price}
+                    </CardText>
+                  </CardBody>
+                </Card>
+              </Link>
             </div>
           )
         })
@@ -106,20 +108,22 @@ function Renderpopular() {
   return (
     <Carousel responsive={responsive} infinite={true} showDots={true} arrows={false} swipeable={true}>
       {
-        product.filter((item) => item.SellerType=="Best Seller").map((item) => {
+        product.filter((item) => item.SellerType == "Best Seller").map((item) => {
           return (
             <div className="p-4">
-              <Card className={styles.featuredcard}>
-                <CardImg src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`} alt={item.name} className={styles.featuredimg}>
-                </CardImg>
-                <CardBody>
-                  <CardText className={styles.para} style={{ color: "brown" }}>{item.Brand}</CardText>
-                  <CardText className={styles.name}>{item.name}</CardText>
-                  <CardText className={styles.price}>
-                    &#8377;{item.price}
-                  </CardText>
-                </CardBody>
-              </Card>
+              <Link href={`/menu/${item._id}`} className={styles.link}>
+                <Card className={styles.featuredcard}>
+                  <CardImg src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`} alt={item.name} className={styles.featuredimg}>
+                  </CardImg>
+                  <CardBody>
+                    <CardText className={styles.para} style={{ color: "brown" }}>{item.Brand}</CardText>
+                    <CardText className={styles.name}>{item.name}</CardText>
+                    <CardText className={styles.price}>
+                      &#8377;{item.price}
+                    </CardText>
+                  </CardBody>
+                </Card>
+              </Link>
             </div>
           )
         })
@@ -143,7 +147,7 @@ function RenderSpeical() {
     if (min <= 10) min = '0' + min;
     if (sec <= 10) sec = '0' + sec;
 
-    return "00"+" : "+ min + " : " + sec;
+    return "00" + " : " + min + " : " + sec;
   }
   useEffect(() => {
     timer.current = setInterval(() => {
@@ -178,23 +182,25 @@ function RenderSpeical() {
         product.filter((item) => item.label === "Deal Of The Day").map((item) => {
           return (
             <div className="p-4">
-              <Card className={styles.featuredcard}>
-                <CardImg src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`} alt={item.name} className={styles.featuredimg}>
-                </CardImg>
-                <CardImgOverlay>
-                  <Badge color="danger">{item.label}</Badge>
-                </CardImgOverlay>
-                <CardBody>
-                  <CardText className={styles.para} style={{ color: "brown" }}>{item.Brand}</CardText>
-                  <CardText className={styles.name}>{item.name}</CardText>
-                  <CardText>
-                    <h7 className={styles.para} style={{color:"brown"}}>left hours</h7>{" : "}<Badge className={styles.para} color="danger">  {formatTime(Countdown)}</Badge>
-                  </CardText>
-                  <CardText className={styles.price}>
-                  <h7 className={styles.cancel}>&#8377;{item.Cprice}</h7> &#8377;{item.price}
+              <Link href={`/menu/${item._id}`} className={styles.link}>
+                <Card className={styles.featuredcard}>
+                  <CardImg src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`} alt={item.name} className={styles.featuredimg}>
+                  </CardImg>
+                  <CardImgOverlay>
+                    <Badge color="danger">{item.label}</Badge>
+                  </CardImgOverlay>
+                  <CardBody>
+                    <CardText className={styles.para} style={{ color: "brown" }}>{item.Brand}</CardText>
+                    <CardText className={styles.name}>{item.name}</CardText>
+                    <CardText>
+                      <h7 className={styles.para} style={{ color: "brown" }}>left hours</h7>{" : "}<Badge className={styles.para} color="danger">  {formatTime(Countdown)}</Badge>
                     </CardText>
-                </CardBody>
-              </Card>
+                    <CardText className={styles.price}>
+                      <h7 className={styles.cancel}>&#8377;{item.Cprice}</h7> &#8377;{item.price}
+                    </CardText>
+                  </CardBody>
+                </Card>
+              </Link>
             </div>
           )
         })
@@ -228,11 +234,11 @@ function Home() {
               <CardImg src={"https://eccomerce-tazon.onrender.com/images/Home1.jpg"} alt="Home" className={styles.home1} >
 
               </CardImg>
-               <CardImgOverlay className={styles.home}>
-                <h3 className={styles.heading}>SALES</h3>
+              <CardImgOverlay className={styles.home}>
+                {/* <h3 className={styles.heading}>SALES</h3>
                 <p className={styles.para}>We Have Great Products For You which<br /> can Crave You to Buy Them</p>
-                <button className={styles.shopbtn}>Shop Now</button>
-              </CardImgOverlay> 
+                <button className={styles.shopbtn}>Shop Now</button> */}
+              </CardImgOverlay>
             </Card>
           </div>
           <div className="col-12 col-md-6 m-auto">
@@ -248,7 +254,7 @@ function Home() {
 
               <div className="col-12 col-md-6 p-2">
                 <div className={styles.box2}>
-                  <img src={'https://eccomerce-tazon.onrender.com/images/Fastrack1.png'} alt="div1"className={styles.divimg}  />
+                  <img src={'https://eccomerce-tazon.onrender.com/images/Fastrack1.png'} alt="div1" className={styles.divimg} />
                   <h7 className={styles.para}>Fastrack Smart Watch</h7>
                 </div>
               </div>
@@ -262,7 +268,7 @@ function Home() {
 
               <div className="col-12 col-md-6 p-2">
                 <div className={styles.box4}>
-                  <img src={'https://eccomerce-tazon.onrender.com/images/Laptop41.png'} alt="div1" className={styles.divimg}  />
+                  <img src={'https://eccomerce-tazon.onrender.com/images/Laptop41.png'} alt="div1" className={styles.divimg} />
                   <h7 className={styles.para}>
                     Xiaomi Notebook Pro
                   </h7>
@@ -332,10 +338,10 @@ function Home() {
           </div>
           <div className="col-12 col-md-12 p-4  pb-2border">
             <h3>POPULAR PRODUCTS</h3>
-            <Renderpopular/>
+            <Renderpopular />
           </div>
           <div className="col-8 col-md-8 p-3 text-center" >
-            <div className="text-center p-3 border rounded-3" style={{background:"rgb(245,245,245"}}>
+            <div className="text-center p-3 border rounded-3" style={{ background: "rgb(245,245,245" }}>
               <h1>Enjoy Shopping</h1>
             </div>
           </div>

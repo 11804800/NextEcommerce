@@ -227,7 +227,7 @@ function RenderPrice({ price, id, Category }) {
 function RenderImage({ image }) {
     return (
         <div>
-            <img src={`http://localhost:3000${image}`} alt={image} className={styles.image} />
+            <img src={`https://eccomerce-tazon.onrender.com${image}`} alt={image} className={styles.image} />
         </div>
     )
 }
@@ -237,7 +237,7 @@ export default function Menu({ params }) {
     const [product, setProduct] = useState([]);
     useEffect(() => {
         const item = async () => {
-            const res = await fetch('http://localhost:3000/product/All');
+            const res = await fetch('https://eccomerce-tazon.onrender.com/product/All');
             const data = await res.json();
             setProduct(data);
         }
@@ -257,19 +257,19 @@ export default function Menu({ params }) {
                             return (
                                 <div>
                                     <figure onClick={() => setImage(item.preveiw.preveiw1)} className="p-3">
-                                        <img src={`http://localhost:3000${item.preveiw.preveiw1}`}
+                                        <img src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`}
                                             alt={item.name}
                                             width="60" className="border rounded-3 p-2"
                                         />
                                     </figure>
                                     <figure onClick={() => setImage(item.preveiw.preveiw2)} className="p-3">
-                                        <img src={`http://localhost:3000${item.preveiw.preveiw2}`}
+                                        <img src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw2}`}
                                             alt={item.name}
                                             width="60" className="border rounded-3"
                                         />
                                     </figure>
                                     <figure onClick={() => setImage(item.preveiw.preveiw3)} className="p-3">
-                                        <img src={`http://localhost:3000${item.preveiw.preveiw3}`}
+                                        <img src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw3}`}
                                             alt={item.name}
                                             width="60"
                                             className="border rounded-3"

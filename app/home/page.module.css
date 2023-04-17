@@ -22,6 +22,13 @@
     text-shadow: 1px 0px #411515, 0px 1px #70125c;
 }
 
+
+
+.link
+{
+    text-decoration: none;
+    color:black
+}
 .home1 {
     width: 100%;
     height: 650px;
@@ -38,8 +45,7 @@
 {
     position:relative;
     text-align: center;
-    margin-top: -200px;
-}
+ }
 .shopbtn
 {
     padding: 3px 20px 3px 20px;
