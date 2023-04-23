@@ -1,11 +1,10 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { showSave } from "../Redux/save";
-import { Card, CardBody, CardHeader, CardImg, CardText } from "reactstrap";
+import { Card, CardBody,CardImg, CardText } from "reactstrap";
 import { DeleteSave, AddToCart } from "../Redux/actions";
 import Styles from './page.module.css';
-import {Auth,users} from '../Redux/auth';
 function Save() {
     const dispatch = useDispatch();
     const product = useSelector((state) => {
@@ -14,13 +13,13 @@ function Save() {
     const id = useSelector((state) => {
         return state.save.value
     });
-    const creds=useSelector((state)=>{
-        return state.auth.creds
-    });
+    const [creds,setCreds]=useState("");
     useEffect(() => {
         const item = async () => {
-            const res = await fetch("http://localhost:3000/save");
-            const resp = await fetch('http://localhost:3000/product/All');
+            const cred=localStorage.getItem('creds') ? JSON.parse(localStorage.getItem('creds')) : null;
+            setCreds(cred);
+            const res = await fetch("https://eccomerce-tazon.onrender.com/save");
+            const resp = await fetch('https://eccomerce-tazon.onrender.com/product/All');
             const data = await res.json();
             const products = await resp.json();
             dispatch(showSave(data));
@@ -41,12 +40,12 @@ function Save() {
             {
                 id.filter((item)=>item.author.username===creds.username).map((item) => {
                     return (
-                        <div className="col-12 col-md-3">
+                        <div className="col-12 col-md-3" key={item._id}>
                             {
                                 product.filter((Elem) => Elem._id === item.ProductId).map((Elem) => {
                                     return (
-                                        <Card className={Styles.box}>
-                                            <CardImg src={`http://localhost:3000${Elem.preveiw.preveiw1}`} alt={Elem.name} style={{ width: "100%" }}>
+                                        <Card className={Styles.box} key={Elem._id}>
+                                            <CardImg src={`https://eccomerce-tazon.onrender.com${Elem.preveiw.preveiw1}`} alt={Elem.name} style={{ width: "100%" }}>
                                             </CardImg>
                                             <CardBody>
                                                 <CardText className={Styles.heading}>{Elem.name}</CardText>

@@ -1,5 +1,5 @@
 "use client";
-import { Badge, Breadcrumb, BreadcrumbItem, Card, CardBody, CardImg, CardImgOverlay, CardText } from "reactstrap";
+import { Badge, Card, CardBody, CardImg, CardImgOverlay, CardText } from "reactstrap";
 import styles from './page.module.css';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from "react";
@@ -45,11 +45,11 @@ function RenderFeatured() {
 
 
   return (
-    <Carousel responsive={responsive} infinite={true} showDots={true} arrows={false} swipeable={true}>
+    <Carousel responsive={responsive} infinite={true} swipeable={true}>
       {
         product.filter((item) => item.featured === true).map((item) => {
           return (
-            <div className="p-4">
+            <div className="p-4" key={item._id}>
               <Link href={`/menu/${item._id}`} className={styles.link}>
                 <Card className={styles.featuredcard}>
                   <CardImg src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`} alt={item.name} className={styles.featuredimg}>
@@ -106,11 +106,11 @@ function Renderpopular() {
 
 
   return (
-    <Carousel responsive={responsive} infinite={true} showDots={true} arrows={false} swipeable={true}>
+    <Carousel responsive={responsive} infinite={true} swipeable={true}>
       {
         product.filter((item) => item.SellerType == "Best Seller").map((item) => {
           return (
-            <div className="p-4">
+            <div className="p-4" key={item._id}>
               <Link href={`/menu/${item._id}`} className={styles.link}>
                 <Card className={styles.featuredcard}>
                   <CardImg src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`} alt={item.name} className={styles.featuredimg}>
@@ -177,11 +177,11 @@ function RenderSpeical() {
 
 
   return (
-    <Carousel responsive={responsive} infinite={true} showDots={true} arrows={false} swipeable={true}>
+    <Carousel responsive={responsive} infinite={true} swipeable={true}>
       {
         product.filter((item) => item.label === "Deal Of The Day").map((item) => {
           return (
-            <div className="p-4">
+            <div className="p-4" key={item._id}>
               <Link href={`/menu/${item._id}`} className={styles.link}>
                 <Card className={styles.featuredcard}>
                   <CardImg src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`} alt={item.name} className={styles.featuredimg}>
@@ -219,10 +219,6 @@ function RenderSpeical() {
 
 function Home() {
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
-  const toogle = () => {
-    setOpen(!open)
-  }
   return (
     <>
       <div className="container-fluid p-1">
@@ -235,9 +231,6 @@ function Home() {
 
               </CardImg>
               <CardImgOverlay className={styles.home}>
-                {/* <h3 className={styles.heading}>SALES</h3>
-                <p className={styles.para}>We Have Great Products For You which<br /> can Crave You to Buy Them</p>
-                <button className={styles.shopbtn}>Shop Now</button> */}
               </CardImgOverlay>
             </Card>
           </div>
@@ -283,7 +276,7 @@ function Home() {
             <div className={styles.inline}>
               <div className="row justify-content-center">
                 <div className="col-12 col-md-5 m-auto">
-                  <img src={"https://eccomerce-tazon.onrender.com/images/Delivery.png"} alt="logo" width="100" />
+                  <img src={"https://eccomerce-tazon.onrender.com/images/Delivery.png"} alt="logo" width="80" />
                 </div>
                 <div className="col-12 col-md-7 m-auto">
                   <h7 className={styles.para}>Free Shipping</h7>
@@ -292,7 +285,7 @@ function Home() {
               </div>
               <div className="row justify-content-center">
                 <div className="col-12 col-md-5">
-                  <img src={"https://eccomerce-tazon.onrender.com/images/Gift.png"} alt="logo" width="100" />
+                  <img src={"https://eccomerce-tazon.onrender.com/images/Gift.png"} alt="logo" width="80" />
                 </div>
                 <div className="col-12 col-md-7 m-auto">
                   <h7 className={styles.para}>Gift A Product</h7>
@@ -301,7 +294,7 @@ function Home() {
               </div>
               <div className="row justify-content-center">
                 <div className="col-12 col-md-5">
-                  <img src={"https://eccomerce-tazon.onrender.com/images/Help.png"} alt="logo" width="100" />
+                  <img src={"https://eccomerce-tazon.onrender.com/images/Help.png"} alt="logo" width="80" />
                 </div>
                 <div className="col-12 col-md-7 m-auto">
                   <h7 className={styles.para}>24/7 Help & Support</h7>
@@ -310,7 +303,7 @@ function Home() {
               </div>
               <div className="row justify-content-center">
                 <div className="col-12 col-md-5">
-                  <img src={"https://eccomerce-tazon.onrender.com/images/Offers.png"} alt="logo" width="100" />
+                  <img src={"https://eccomerce-tazon.onrender.com/images/Offers.png"} alt="logo" width="80" />
                 </div>
                 <div className="col-12 col-md-7 m-auto">
                   <h7 className={styles.para}>Regular Discounts</h7>
@@ -319,7 +312,7 @@ function Home() {
               </div>
               <div className="row justify-content-center">
                 <div className="col-12 col-md-5">
-                  <img src={"https://eccomerce-tazon.onrender.com/images/Card.png"} alt="logo" width="100" />
+                  <img src={"https://eccomerce-tazon.onrender.com/images/Card.png"} alt="logo" width="80" />
                 </div>
                 <div className="col-12 col-md-7 m-auto">
                   <h7 className={styles.para}>Secure Payment</h7>
@@ -328,16 +321,16 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-12 p-4 pb-2 border ">
-            <h3>Featured Collection</h3>
+          <div className="col-12 col-md-12 p-5 pb-2 border">
+            <h3 className="text-center">Featured Collection</h3>
             <RenderFeatured />
           </div>
-          <div className="col-12 col-md-12 p-4 pb-2 border">
-            <h3>Special Products</h3>
+          <div className="col-12 col-md-12 p-5 pb-2 border ">
+            <h3 className="text-center">Special Products</h3>
             <RenderSpeical />
           </div>
-          <div className="col-12 col-md-12 p-4  pb-2border">
-            <h3>POPULAR PRODUCTS</h3>
+          <div className="col-12 col-md-12 p-5  pb-2 border ">
+            <h3 className="text-center">Popular Products</h3>
             <Renderpopular />
           </div>
           <div className="col-8 col-md-8 p-3 text-center" >

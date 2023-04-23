@@ -3,17 +3,16 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { Row, Col, Label, Button, Table, Modal, ModalBody, ModalHeader, Card, CardHeader, CardText, CardBody } from 'reactstrap';
 import { useDispatch, useSelector } from "react-redux";
-import { LocalForm, Control, Errors } from "react-redux-form";
+import { LocalForm, Control } from "react-redux-form";
 import { showComments } from "../comments";
 import styles from './page.module.css';
-import { redirect } from 'next/navigation';
 import { useState } from "react";
 import { PostComment, AddToCart } from "../action";
 import { postTemp } from '../action'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import RelatedItem from "./related";
-
+import Image from "next/image";
 
 function RenderComments({ id }) {
     const responsive = {
@@ -40,7 +39,8 @@ function RenderComments({ id }) {
     const dispatch = useDispatch();
 
     const submit = (value) => {
-        dispatch(PostComment(id, value.rating, value.comment));
+        dispatch(PostComment(id, value.rating, value.reveiw));
+        setActive(!active);
     }
     const [active, setActive] = useState(false);
 
@@ -50,10 +50,9 @@ function RenderComments({ id }) {
 
     useEffect(() => {
         const item = async () => {
-            const res = await fetch('http://localhost:3000/comments');
+            const res = await fetch('https://eccomerce-tazon.onrender.com/comments');
             const data = await res.json();
             dispatch(showComments(data));
-            console.log(data);
         };
         item();
     }, []);
@@ -66,17 +65,17 @@ function RenderComments({ id }) {
                     <div className="col-12 col-md-9 p-2">
                         <Carousel responsive={responsive} showDots={true}>
                             {
-                                comments.filter((comment) => comment.dish === id).map((comment) => {
+                                comments.filter((comment) => comment.productId === id).map((comment) => {
                                     return (
                                         <Card key={comment._id}>
                                             <CardHeader>
-                                                <h6>{comment.author}</h6>
+                                                <h6>{comment.author.username}</h6>
                                             </CardHeader>
                                             <CardBody>
                                                 <CardText>
-                                                    <h7 style={{ fontWeight: "500" }}>Rating :{comment.rating}</h7>
-                                                    <h6 style={{ fontWeight: "500" }}>Reveiw</h6>
-                                                    <p style={{ fontSize: "small", fontWeight: "500" }}>{comment.comment}</p>
+                                                    <h6 style={{ fontWeight: "500" }}>Rating :{comment.rating}</h6>
+                                                    <h7 style={{ fontWeight: "500" }}>Reveiw : </h7>
+                                                    <h7 style={{ fontSize: "small", fontWeight: "500" }}>{comment.comment}</h7>
                                                 </CardText>
                                             </CardBody>
                                         </Card>
@@ -103,11 +102,6 @@ function RenderComments({ id }) {
                 </ModalHeader>
                 <ModalBody>
                     <LocalForm onSubmit={submit}>
-                        <Row className="form-group p-2">
-                            <Col md={{ size: 5, offset: 5 }}>
-                                <span className="fa fa-user fs-2 p-3 bg-primary rounded-circle text-light"></span>
-                            </Col>
-                        </Row>
                         <Row className="form-group p-2">
                             <Label htmlFor="rating" md={2} style={{ fontWeight: "500" }}>Rating</Label>
                             <Col md={10}>
@@ -152,7 +146,7 @@ function RenderPrice({ price, id, Category }) {
     });
     useEffect(() => {
         const item = async () => {
-            const res = await fetch('http://localhost:3000/plan');
+            const res = await fetch('https://eccomerce-tazon.onrender.com/plan');
             const data = await res.json();
             setPlan(data);
         }
@@ -161,11 +155,11 @@ function RenderPrice({ price, id, Category }) {
 
     const Plan = product.filter((item) => item._id === id).map((item) => {
         return (
-            <div>
+            <div key={item._id}>
                 {
                     plan.filter((Elem) => Elem.Category === item.Category).map((Elem) => {
                         return (
-                            <label style={{ color: "rgba(41, 83, 76)" }}>
+                            <label style={{ color: "rgba(41, 83, 76)" }} key={Elem._id}>
                                 <input type="checkbox" onChange={() => setPrice(Elem.price)} />
                                 {" "}
                                 <h7 className={styles.text}>{Elem.name} </h7><h7 className={`${styles.text} text-dark`}>for</h7> <h7 className={styles.text} style={{ color: "brown" }}>&#8377;{Elem.price}</h7>
@@ -227,7 +221,7 @@ function RenderPrice({ price, id, Category }) {
 function RenderImage({ image }) {
     return (
         <div>
-            <img src={`https://eccomerce-tazon.onrender.com${image}`} alt={image} className={styles.image} />
+            <Image src={`https://eccomerce-tazon.onrender.com${image}`} alt={image} width="800" height="800" className={styles.image}></Image>
         </div>
     )
 }
@@ -243,56 +237,51 @@ export default function Menu({ params }) {
         }
         item();
     }, []);
-    const [ravi, setRavi] = useState(false);
-    if (ravi) {
-        redirect('/menu');
-    }
     const [image, setImage] = useState("");
     return (
         <div className="container-fluid p-5">
             <div className="row justify-content-center">
-                <div className="col-1 col-md-1 p-1 m-auto d-md-block">
+                <div className="col-1 col-md-1 p-1 d-md-block">
                     {
                         product.filter((item) => item._id === params.id).map((item) => {
                             return (
-                                <div>
+                                <div key={item._id}>
                                     <figure onClick={() => setImage(item.preveiw.preveiw1)} className="p-3">
-                                        <img src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`}
+                                        <Image src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`}
                                             alt={item.name}
-                                            width="60" className="border rounded-3 p-2"
-                                        />
+                                            width="60"  height="60" className="border rounded-3 p-2"
+                                        ></Image>
                                     </figure>
                                     <figure onClick={() => setImage(item.preveiw.preveiw2)} className="p-3">
-                                        <img src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw2}`}
+                                        <Image src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw2}`}
                                             alt={item.name}
-                                            width="60" className="border rounded-3"
-                                        />
+                                            width="60"  height="60" className="border rounded-3"
+                                        ></Image>
                                     </figure>
                                     <figure onClick={() => setImage(item.preveiw.preveiw3)} className="p-3">
-                                        <img src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw3}`}
+                                        <Image src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw3}`}
                                             alt={item.name}
-                                            width="60"
+                                            width="60" height="60"
                                             className="border rounded-3"
-                                        />
+                                        ></Image>
                                     </figure>
                                 </div>
                             )
                         })
                     }
                 </div>
-                <div className="col-9 col-md-6 p-2 m-auto">
+                <div className="col-9 col-md-6 m-auto">
                     <RenderImage image={image} />
-
                 </div>
                 <div className="col-12 col-md-5 p-2">
                     {
                         product.filter((item) => item._id === params.id).map((item) => {
                             return (
-                                <div className="row justify-content-center">
+                                <div className="row justify-content-center" key={item._id}>
                                     <div className="col-12 col-md-6 p-2 m-auto">
                                         <h5>{item.fullname}</h5>
                                         <hr />
-                                        &#8377;<span className='fw-bold fs-4 '>{item.price}</span>
+                                        <span className="fs-4" style={{ fontWeight: "600" }}>MRP : </span><span className='fs-4 ' style={{ fontWeight: "500" }}>&#8377;{item.price}</span>
                                         <hr />
                                         <tr>
                                             <td><h6>Colour: </h6></td>
@@ -344,7 +333,7 @@ export default function Menu({ params }) {
                 {
                     product.filter((item) => item._id === params.id).map((item) => {
                         return (
-                            <div className={styles.description}>
+                            <div className={styles.description} key={item._id}>
                                 <p>{item.description}</p>
                             </div>)
                     })
@@ -357,8 +346,10 @@ export default function Menu({ params }) {
                 {
                     product.filter((item) => item._id === params.id).map((item) => {
                         return (
-                            <RelatedItem Category={item.Category}/>
-                            )
+                            <div key={item._id}>
+                                <RelatedItem Category={item.Category} />
+                            </div>
+                        )
                     })
                 }
             </div>

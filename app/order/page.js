@@ -1,23 +1,19 @@
 "use client";
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
-import classnames from 'classnames';
+import { TabContent, TabPane, Nav, NavItem, Button } from 'reactstrap';
 import styles from './page.module.css';
 import { showOrder } from '../Redux/Order';
 import { showProducts } from '../Redux/products';
 import { useDispatch, useSelector } from 'react-redux';
 import { postTemp } from '../Redux/actions';
-import {Auth,users} from '../Redux/auth';
+import Image from 'next/image';
 export default function Order() {
     const [activeTab, setTab] = useState('1');
 
     const toogletab = (tab) => {
         setTab(tab)
     }
-    const creds=useSelector((state)=>{
-        return state.auth.creds
-    });
     const dispatch = useDispatch();
 
     const Order = useSelector((state) => {
@@ -26,16 +22,19 @@ export default function Order() {
 
     const product = useSelector((state) => {
         return state.product.All
-    })
+    });
+    const [creds,setCreds]=useState("");
+
     useEffect(() => {
         const item = async () => {
+            const cred=localStorage.getItem('creds') ? JSON.parse(localStorage.getItem('creds')) : null;
+            setCreds(cred);
             const res = await fetch('https://eccomerce-tazon.onrender.com/order');
             const resp = await fetch('https://eccomerce-tazon.onrender.com/product/All');
             const response = await resp.json();
             const data = await res.json();
             dispatch(showOrder(data));
             dispatch(showProducts(response));
-            dispatch(users());
         }
         item();
     }, []);
@@ -57,11 +56,11 @@ export default function Order() {
                             {
                                 Order.filter((item)=>item.buyer.username===creds.username).map((item) => {
                                     return (
-                                        <div>
+                                        <div key={item._id}>
                                             {
                                                 product.filter((Elem) => Elem._id === item.ProductId).map((Elem) => {
                                                     return (
-                                                        <div className='row justify-content-center p-3' key={item._id}>
+                                                        <div className='row justify-content-center p-3' key={Elem._id}>
                                                             <div className='col-12 col-md-11 rounded-2' style={{ background:"rgb(240, 242, 242)" }}>
                                                                 <div className='p-2'>
                                                                     <p style={{width:"50%",fontSize:"smaller"}}>ORDER PLACED</p>
@@ -80,7 +79,7 @@ export default function Order() {
                                                                 </div>
                                                             </div>
                                                             <div className='col-12 col-md-4 p-2'>
-                                                                <img src={`https://eccomerce-tazon.onrender.com/${Elem.preveiw.preveiw1}`} alt={Elem.name} width="100" />
+                                                                <Image src={`https://eccomerce-tazon.onrender.com/${Elem.preveiw.preveiw1}`} alt={Elem.name} width="100" height="100"></Image>
                                                             </div>
                                                             <div className='col-12 col-md-7 p-2'>
                                                                 <h7 style={{fontWeight:"500"}}>{Elem.name}</h7>
@@ -108,11 +107,11 @@ export default function Order() {
                             {
                                 Order.filter((item) => item.deliveryStatus === "Preparing").map((item) => {
                                     return (
-                                        <div>
+                                        <div key={item._id}>
                                             {
                                                 product.filter((Elem) => Elem._id === item.ProductId).map((Elem) => {
                                                     return (
-                                                        <div className='row justify-content-center p-3' key={item._id}>
+                                                        <div className='row justify-content-center p-3' key={Elem._id}>
                                                         <div className='col-12 col-md-11 rounded-2' style={{ background:"rgb(240, 242, 242)" }}>
                                                             <div className='p-2'>
                                                                 <p style={{width:"50%",fontSize:"smaller"}}>ORDER PLACED</p>
@@ -131,7 +130,7 @@ export default function Order() {
                                                             </div>
                                                         </div>
                                                         <div className='col-12 col-md-4 p-2'>
-                                                            <img src={`https://eccomerce-tazon.onrender.com/${Elem.preveiw.preveiw1}`} alt={Elem.name} width="100" />
+                                                            <Image src={`https://eccomerce-tazon.onrender.com/${Elem.preveiw.preveiw1}`} alt={Elem.name} width="100" height="100"></Image>
                                                         </div>
                                                         <div className='col-12 col-md-7 p-2'>
                                                             <h7 style={{fontWeight:"500"}}>{Elem.name}</h7>

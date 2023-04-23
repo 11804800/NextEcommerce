@@ -1,15 +1,13 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dropdown, DropdownMenu, DropdownToggle, Button, Table } from "reactstrap";
-import { showCart, addCart } from "../menu/cart";
+import { Button} from "reactstrap";
+import { showCart } from "../menu/cart";
 import { showProducts } from "../Redux/products";
 import { UpdateQuantity, DeleteCart, PostSave, postTemp, Updatecart } from '../Redux/actions';
 import Save from "./save";
 import Link from "next/link";
 import Styles from './page.module.css';
-import { useState } from "react";
-import {Auth,users} from '../Redux/auth';
 
 export default function cart() {
     const product = useSelector((state) => {
@@ -19,21 +17,17 @@ export default function cart() {
     const id = useSelector((state) => {
         return state.cart.value
     });
-    const creds=useSelector((state)=>{
-        return state.auth.creds
-    });
-    //const [total,setTotal]=useState(0);
-    const [state, setState] = useState(true);
+    const [creds,setCreds]=useState("");
     useEffect(() => {
         const item = async () => {
+            const cred=localStorage.getItem('creds') ? JSON.parse(localStorage.getItem('creds')) : null;
+            setCreds(cred);
             const res = await fetch("https://eccomerce-tazon.onrender.com/cart");
             const resp = await fetch('https://eccomerce-tazon.onrender.com/product/All');
             const data = await res.json();
             const products = await resp.json();
             dispatch(showProducts(products));
             dispatch(showCart(data));
-            dispatch(users());
-            console.log(products);
         };
         item();
     }, []);
@@ -56,8 +50,6 @@ export default function cart() {
     const HandleSelect = (id,quantity,productid) => {
         dispatch(Updatecart(true, id,quantity,productid))
     }
-    // const total = this.props.orderdish.reduce((a, v) => a + v.price * v.quantity, 0);
-
     return (
         <div className="container p-2">
             <div className="row justify-content-center p-4" >
@@ -73,11 +65,11 @@ export default function cart() {
                     {
                         id.filter((item)=>item.buyer.username===creds.username).map((item) => {
                             return (
-                                <div>
+                                <div key={item._id}>
                                     {
                                         product.filter((ELem) => ELem._id === item.ProductId).map((ELem) => {
                                             return (
-                                                <div className={`${Styles.box1} p-3 row  justify-content-center`}>
+                                                <div className={`${Styles.box1} p-3 row  justify-content-center`} kry={ELem._id}>
                                                     <div className="col-1 col-md-1 m-auto">
                                                         {item.include ?
                                                             <input type="checkbox" defaultChecked onChange={() => deletecart(item._id,item.Quantity,ELem._id)}>

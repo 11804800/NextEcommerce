@@ -3,13 +3,13 @@ import Link from "next/link";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useState, useEffect } from "react";
-import { Card, CardBody, CardHeader, CardImg } from 'reactstrap';
+import { Card, CardHeader, CardImg } from 'reactstrap';
 import styles from '../page.module.css';
 export default function RelatedItem({ Category }) {
     const [product, setProduct] = useState([]);
     useEffect(() => {
         const item = async () => {
-            const res = await fetch('http://localhost:3000/product/All');
+            const res = await fetch('https://eccomerce-tazon.onrender.com/product/All');
             const data = await res.json();
             setProduct(data);
         }
@@ -39,9 +39,9 @@ export default function RelatedItem({ Category }) {
                 {
                     product.filter((item) => item.Category === Category).map((item) => {
                         return (
-                            <Link href={`/menu/${item._id}`} className={styles.link}>
-                                <Card key={item._id}>
-                                    <CardImg src={`http://localhost:3000${item.preveiw.preveiw1}`} alt={item.name} className={styles.reveiwimg}>
+                            <Link href={`/menu/${item._id}`} className={styles.link} key={item._id}>
+                                <Card >
+                                    <CardImg src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`} alt={item.name} className={styles.reveiwimg}>
 
                                     </CardImg>
                                     <CardHeader>

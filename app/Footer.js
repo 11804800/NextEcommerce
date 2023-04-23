@@ -8,8 +8,6 @@ function Footer(){
         <div className={`container-fluid p-5 ${Styles.footdiv}`}>
             <div className='row justify-content-center'>
                 <div className='col-12 col-md-3 p-3'>
-                    <img src={"http://localhost:3000/images/chef.png"} alt="logo" width="100" height="100" className={Styles.footlogo} />
-                    <h5>STARBELLY</h5>
                     <p className='text-left'>StartBelly is the best website for explore new Snacks and Recipes of food and drinks.
                         it is very simple to use and the best way to find new with help of us</p>
                 </div>

@@ -2,12 +2,10 @@
 import { useEffect, useState } from 'react';
 import { Collapse, Card, CardBody, CardFooter, CardTitle, Button, FormGroup, Table, CardText, CardHeader, Form, Modal, ModalHeader } from 'reactstrap';
 import styles from './page.module.css';
-import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteTemp, Updatetemp, DelTempItem, PlaceOrder } from '../Redux/actions';
-import { showProducts } from '../Redux/products';
 import { showTemp } from '../Redux/Temp';
-
+import Image from 'next/image';
 export default function Order() {
     let newDate = new Date().toDateString();
 
@@ -31,9 +29,9 @@ export default function Order() {
     const dispatch = useDispatch();
     useEffect(() => {
         const item = async () => {
-            const res = await fetch("http://localhost:3000/userdata");
-            const resp = await fetch('http://localhost:3000/temp');
-            const product = await fetch('http://localhost:3000/product/All');
+            const res = await fetch("https://eccomerce-tazon.onrender.com/userdata");
+            const resp = await fetch('https://eccomerce-tazon.onrender.com/temp');
+            const product = await fetch('https://eccomerce-tazon.onrender.com/product/All');
             const Elem = await product.json();
             const response = await resp.json();
             const data = await res.json();
@@ -56,13 +54,13 @@ export default function Order() {
     }
     const Products = id.map((item) => {
         return (
-            <div>
+            <div key={item._id}>
                 {
                     product.filter((Elem) => Elem._id === item.ProductId).map((Elem) => {
                         return (
-                            <div className='row justify-content-center p-2'>
+                            <div className='row justify-content-center p-2' key={item._id}>
                                 <div className='col-12 col-md-4'>
-                                    <img src={`http://localhost:3000${Elem.preveiw.preveiw1}`} alt={Elem.name} width="100" />
+                                    <Image src={`https://eccomerce-tazon.onrender.com${Elem.preveiw.preveiw1}`} key={item._id} alt={Elem.name} width="100" height="100"></Image>
                                 </div>
                                 <div className='col-12 col-md-8'>
                                     <h5>{Elem.name}</h5>
@@ -151,7 +149,7 @@ export default function Order() {
                                         {
                                             Data.map((item) => {
                                                 return (
-                                                    <option style={{ fontWeight: "600" }}>{item.address}</option>
+                                                    <option style={{ fontWeight: "600" }} key={item._id}>{item.address}</option>
                                                 )
                                             })
                                         }
@@ -179,11 +177,10 @@ export default function Order() {
                                         <div className='border-0'>
                                             <p className='p-5 pt-1 pb-0'>You can save your cards as per new RBI guidelines.</p>
                                             <div className={`${styles.poster} p-5 pt-1 pb-0 d-block`}>
-                                                <img src={"http://localhost:3000/images/visa.jpg"} alt="visa" width="100" height="130" className='p-4' />
-                                                <img src={"http://localhost:3000/images/master.jpg"} alt="mastercard" width="140" height="110" className='p-4' />
-                                                <img src={"http://localhost:3000/images/maestro.png"} alt="maestro" width="100" height="110" className='p-4' />
-                                                <img src={"http://localhost:3000/images/bajaj.png"} alt="bajaj" width="100" height="110" className='p-4' />
-                                                <img src={"http://localhost:3000/images/rupay.jpg"} alt="rupay" width="110" height="130" className='p-4' />
+                                                <Image src={"https://eccomerce-tazon.onrender.com/images/master.jpg"} alt="mastercard" width="140" height="110" className='p-4' ></Image>
+                                                <Image src={"https://eccomerce-tazon.onrender.com/images/maestro.png"} alt="maestro" width="100" height="110" className='p-4' ></Image>
+                                                <Image src={"https://eccomerce-tazon.onrender.com/images/bajaj.png"} alt="bajaj" width="100" height="110" className='p-4' ></Image>
+                                                <Image src={"https://eccomerce-tazon.onrender.com/images/rupay.jpg"} alt="rupay" width="110" height="130" className='p-4' ></Image>
                                             </div>
                                             <Collapse isOpen={stage3}>
                                                 <div className={`p-5 pt-1 pb-2 ${styles.poster}`}>
@@ -241,7 +238,6 @@ export default function Order() {
                                 <div className='row justify-content-center'>
                                     <div className='col-12 col-md-4 m-auto text-center'>
                                         <Button className={`btn btn-warning ${styles.btntxt}`} onClick={HandleTemp}>Place your order</Button>
-
                                     </div>
                                     <div className='col-12 col-md-8'>
                                         <p className='fs-5 fw-bold' style={{ color: "brown" }}>Order Total: &#8377;{total}</p>
@@ -256,11 +252,11 @@ export default function Order() {
                     <Card className='p-2'>
                         <CardTitle className='p-3 text-center'>
                             <p className={`p-3 ${styles.text}`}>Choose a payment method to continue checking out. you will still have
-                                a chance to reveiw your order before it's final
+                                a chance to reveiw your order before it&apos;s final
                             </p>
-                            <hr />
+                            <hr/>
                         </CardTitle>
-                        <CardBody className='p-3 '>
+                        <CardBody className='p-3'>
                             <h5 className='fw-bold'>Order Summary</h5>
                             <Table className={styles.text}>
                                 <tr>

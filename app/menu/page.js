@@ -1,6 +1,5 @@
 "use client";
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from './page.module.css';
 import { useSpring, animated } from "react-spring";
 import { useSelector, useDispatch } from 'react-redux';
@@ -67,7 +66,7 @@ export default function Menu() {
 
     const products = product.map((item) => {
         return (
-            <animated.div className='col-12 col-md-3 p-3' style={fade}>
+            <animated.div className='col-12 col-md-4 p-3' style={fade} key={item._id}>
                 <Link href={`/menu/${item._id}`} className={styles.link}>
                     <Card key={item._id} style={{ background: "rgb(247, 247, 247)" }}>
                         <CardImg src={`https://eccomerce-tazon.onrender.com${item.preveiw.preveiw1}`} className={styles.image}></CardImg>
@@ -86,7 +85,7 @@ export default function Menu() {
         <animated.div className="container-fluid p-2" style={fade}>
             <div className="row justify-content-center p-4">
                 <div className="col-12 col-md-12 text-center">
-                    <h1 className={styles.h3}>Menu {search}</h1>
+                    <h1 className={styles.h3}>Products</h1>
                 </div>
                 <div className='col-12 col-md-12 p-3'>
                     <div className='row'>
@@ -96,14 +95,14 @@ export default function Menu() {
                                     <label htmlFor='search'></label>
                                     <Col md={4}>
                                         <Control.text model=".search" className='form-control'
-                                        placeholder="I'm Looking for ...." id="search" name="search"/>
+                                        placeholder="Search Products" id="search" name="search"/>
                                     </Col>
                                 </Row>
                             </LocalForm>
                         </div>
                         <div className='col-12 col-md-3 p-2'>
                             <select model=".category" name="category" className='form-control' onChange={(e) => setSort(e.target.value)}>
-                                <option></option>
+                                <option disabled>Default (Low to High)</option>
                                 <option value="price,asc">Price (Low To High)</option>
                                 <option value="price,desc">Price (High To Low)</option>
                                 <option value="name,asc">A to Z</option>
@@ -113,7 +112,7 @@ export default function Menu() {
 
                     </div>
                 </div>
-                <div className='col-md-3 col-12 p-2 border'>
+                <div className={`col-md-3 col-12 p-2 border ${styles.divleft}`}>
                     <LocalForm onSubmit={(value) => Handleform(value)}>
                     </LocalForm>
                     <h4 className='p-2'>Category</h4>
@@ -121,8 +120,8 @@ export default function Menu() {
                         {
                             Category.map((item) => {
                                 return (
-                                    <NavItem className='nav-link'>
-                                        <button className={styles.cbtn} onClick={() => setCategory(item)}>{item}</button>
+                                    <NavItem className='nav-link' key={item}>
+                                        <button  key={item} className={styles.cbtn} onClick={() => setCategory(item)}>{item}</button>
                                     </NavItem>
                                 )
                             })
@@ -133,11 +132,11 @@ export default function Menu() {
                     <div className='p-2'>
                         <select defaultValue={brand} className='form-control' 
                         onChange={(e)=>setbrand(''+e.target.value)}>
-                            <option></option>
+                            <option disabled>All</option>
                             {
                                 Brand.map((item) => {
                                     return (
-                                        <option>{item}</option>
+                                        <option key={item}>{item}</option>
                                     )
                                 })
                             }
@@ -148,18 +147,22 @@ export default function Menu() {
                     <div className='p-2'>
                         <select defaultValue={brand} className='form-control' 
                         onChange={(e)=>setcolor(''+e.target.value)}>
-                            <option></option>
+                              <option disabled>All</option>
                             {
                                 Color.map((item) => {
                                     return (
-                                        <option>{item}</option>
+                                        <option key={item}>{item}</option>
                                     )
                                 })
                             }
                         </select>
                     </div>
                 </div>
-                {products}
+                <div className='col-12 col-md-9 p-2'>
+                    <div className={`row justify-content-center ${styles.scroll}`}>
+                    {products}
+                    </div>
+                </div>
             </div>
             <div className='row justify-content-center'>
                 <div className='col-auto'>
@@ -167,7 +170,7 @@ export default function Menu() {
                         {
                             [...new Array(pages)].map((val, index) => {
                                 return (
-                                    <PaginationItem>
+                                    <PaginationItem key={index}>
                                         <PaginationLink onClick={() => setPage(index + 1)}>
                                             {index + 1}
                                         </PaginationLink>

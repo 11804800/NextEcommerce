@@ -1,31 +1,33 @@
 "use client";
 import {
     Navbar, Nav, NavItem, Collapse, NavbarToggler, Modal,
-    ModalHeader, ModalBody, FormGroup, Row, Label, Input, ModalFooter
+    ModalHeader, ModalBody, FormGroup, Label, ModalFooter
 } from "reactstrap";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import styles from './page.module.css';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { LocalForm, Control } from 'react-redux-form';
 import { login, logout } from './Redux/actions';
-
+import Image from "next/image";
 function Header() {
     const dispatch = useDispatch();
-    const auth=useSelector((state)=>{
-        return state.auth.isAuth
-    });
     const [open, setOpen] = useState(false);
     const [active, setActive] = useState(false);
     const Toogle = () => {
         setActive(!active);
     }
+    const [auth,setAuth]=useState("");
+    useEffect(()=>{
+        const item=localStorage.getItem('token')? true:false;
+        setAuth(item);
+    },[]);
     const HandleSubmit = (value) => {
         dispatch(login({ username: value.username, password: value.password }));
         setActive(!active);
     }
     return (
-        <React.Fragment>
+        <>
             <Navbar dark className="bg-dark text-light" expand="md">
                 <NavbarToggler navbar onClick={() => setOpen(!open)} />
                 <Collapse navbar isOpen={open}>
@@ -73,15 +75,15 @@ function Header() {
                             </LocalForm>
                         </div>
                         <div className="col-12 col-md-6">
-                            <img src={"http://localhost:3000/images/ux.png"} className={styles.images} />
+                            <Image src={"https://eccomerce-tazon.onrender.com/images/ux.png"} alt="ux" className={styles.images} width="500" height="500"></Image>
                         </div>
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <p>Don't Have Account? Signup</p>
+                    <p>Don&apos;t Have Account? Signup</p>
                 </ModalFooter>
             </Modal>
-        </React.Fragment>
+        </>
     )
 }
 export default Header;

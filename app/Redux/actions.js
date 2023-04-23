@@ -1,10 +1,7 @@
 "use client";
-import { PostComments } from "../menu/comments";
 import { showCart } from "../menu/cart";
-import { Auth } from "./auth";
 import { postSave, showSave } from "./save";
 import { addCart } from "../menu/cart";
-import { showTemp } from "./Temp";
 import { postOrder } from "./Order";
 
 export const login = (creds) => (dispatch) => {
@@ -33,7 +30,6 @@ export const login = (creds) => (dispatch) => {
             if (response.success) {
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('creds', JSON.stringify(creds));
-                dispatch(Auth());
                 console.log(response.token);
             }
             else {
@@ -49,7 +45,6 @@ export const login = (creds) => (dispatch) => {
 export const logout = () => (dispatch) => {
     localStorage.removeItem('token');
     localStorage.removeItem('creds');
-    dispatch(Auth());
     console.log('logged out');
 };
 

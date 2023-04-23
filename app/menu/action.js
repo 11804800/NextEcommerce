@@ -1,9 +1,9 @@
 "use client";
 import { PostComments } from "../menu/comments";
 import { addCart } from "./cart";
-export const PostComment = (dishId, rating,comment) => (dispatch) => {
+export const PostComment = (Id, rating,comment) => (dispatch) => {
     const newComment = {
-        dish: dishId,
+        productId: Id,
         rating:rating,
         comment: comment
     };
@@ -19,7 +19,7 @@ export const PostComment = (dishId, rating,comment) => (dispatch) => {
     })
         .then((response) => response.json())
         .then((comments) => dispatch(PostComments(comments)))
-        .catch((err) => console.log(err));
+        .catch((err) => {console.log(err),alert("Could not post your comment")});
 };
 
 
